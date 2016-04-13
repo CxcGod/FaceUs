@@ -1,5 +1,6 @@
 package com.microsoft.projectoxford.face.samples;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -65,6 +66,13 @@ public class FaceChoose extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_choose);
 
+        new AlertDialog.Builder(FaceChoose.this)
+                .setTitle("提示")
+                .setMessage("请选择两张包含单个人脸的照片并点击开始匹配")
+                .setPositiveButton("ok",null)
+                .create()
+                .show();
+
         new SearchAllPhotoTask().execute("ll");
 
         mProgressDialog = new ProgressDialog(this);
@@ -112,43 +120,9 @@ public class FaceChoose extends AppCompatActivity {
                     mPhotoWithFaceManager = new PhotoWithFaceManager(mPhotoWithFaces,mMaleFace,mFemaleFace);
 
                     mProgressDialog.setTitle("提示");
-                    mProgressDialog.setMessage("下面是见证奇迹的时候...");
+                    mProgressDialog.setMessage("正在查找合照，请稍候...");
                     mProgressDialog.show();
                     mPhotoWithFaceManager.getMatchedFaces();
-
-                    /*ArrayList<PhotoWithFace> photoWithFaces = mPhotoWithFaceManager.getPhotoWithFaces();
-                    Log.e(TAG,photoWithFaces.size()+"");
-                    for (int i = 0;i<photoWithFaces.size();i++){
-                        Log.e(TAG,photoWithFaces.get(i).getImagePath().toString());
-                        ArrayList<UUID> faceIDs = photoWithFaces.get(i).getFaceID();
-                        for (int j = 0;j< faceIDs.size();j++){
-                            Log.e(TAG,faceIDs.get(j).toString());
-                        }
-                    }*/
-
-                    /*matchedImagePaths = mPhotoWithFaceManager.getMatchedFaces();
-                    if (matchedImagePaths!=null&&matchedImagePaths.size()>0){
-                        Log.e(TAG,matchedImagePaths.size()+"张合照被检测到");
-                        for (int i = 0 ;i < matchedImagePaths.size();i++) {
-                            if (matchedImagePaths.get(i)==null){
-                                Log.e(TAG,"合照路径：null");
-                            }else {
-                                Log.e(TAG, "合照路径：" + matchedImagePaths.get(i)+"");
-                                if(matchedImagePaths.get(i) instanceof String){
-                                    Log.e(TAG, "right");
-                                }else {
-                                    Log.e(TAG, "wrong");
-                                }
-                            }
-                        }
-                        Intent intent = new Intent(FaceChoose.this,ResultActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putStringArrayList("result",matchedImagePaths);
-                        intent.putExtra("bundle_result",bundle);
-                        startActivity(intent);
-                    }else {
-                        Toast.makeText(FaceChoose.this, "没有找到匹配的合照", Toast.LENGTH_SHORT).show();
-                    }*/
 
                 }else {
                     new AlertDialog.Builder(FaceChoose.this)

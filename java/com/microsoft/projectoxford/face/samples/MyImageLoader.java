@@ -34,7 +34,7 @@ public class MyImageLoader {
         ByteArrayOutputStream baos = null ;
         try{
             baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+            bm.compress(Bitmap.CompressFormat.JPEG, 20, baos);
 
         }finally{
             try {

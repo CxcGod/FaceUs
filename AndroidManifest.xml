@@ -17,6 +17,8 @@
             android:label="Us"></activity>
         <activity android:name=".FaceChoose"
             android:label="Choose Face">
+        </activity>
+        <activity android:name=".GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
